@@ -13,8 +13,14 @@
     "license": "ISC",
     "type": "module",
     "devDependencies": {
+        "@commitlint/cli": "^18.6.1",
+        "@commitlint/config-conventional": "^18.6.1",
         "eslint": "^8.46.0",
         "husky": "^8.0.3",
         "lint-staged": "^16.4.0"
+    },
+    "lint-staged": {
+        "*.js": "eslint",
+        "*.{js,json}": "prettier --write"
     }
 }
