@@ -11,6 +11,7 @@ Passo a passo para configurar linting, formatação e git hooks em um novo proje
 **O que faz:** Gerencia dependências do projeto.
 
 **Comandos úteis:**
+
 ```bash
 npm init -y              # Inicializa package.json básico
 npm install -D <pacote>  # Instala como dependência de desenvolvimento
@@ -18,20 +19,32 @@ npm list <pacote>        # Verifica versão instalada
 ```
 
 **Configuração típica:**
+
 ```json
 {
-  "name": "nome-projeto",
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "prepare": "husky"
-  },
-  "devDependencies": {}
+    "name": "nome-projeto",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "prepare": "husky"
+    },
+    "devDependencies": {}
 }
 ```
 
 **Scripts úteis:**
+
 - `"prepare": "husky"` - instala husky automaticamente ao fazer npm install
+- `"postinstall": "npx husky install"` - alternativa (opcional, pode usar só prepare)
+
+**Configs útiles:**
+
+```json
+"lint-staged": {
+  "*.js": "eslint",
+  "*.{js,json}": "prettier --write"
+}
+```
 
 ---
 
@@ -40,6 +53,7 @@ npm list <pacote>        # Verifica versão instalada
 **O que faz:** Análise estática de código - identifica padrões problemáticos e aplica estilo de código.
 
 **Comandos:**
+
 ```bash
 npm install -D eslint@8.46.0
 npx eslint --init     # Configuração interativa
@@ -47,18 +61,19 @@ npx eslint .          # executa lint em todo projeto
 ```
 
 **Configuração (.eslintrc.json):**
+
 ```json
 {
-  "env": {
-    "es2021": true,
-    "node": true
-  },
-  "extends": "eslint:recommended",
-  "parserOptions": {
-    "ecmaVersion": "latest",
-    "sourceType": "module"
-  },
-  "rules": {}
+    "env": {
+        "es2021": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {}
 }
 ```
 
@@ -69,6 +84,7 @@ npx eslint .          # executa lint em todo projeto
 **O que faz:** Formatador de código que garante estilo consistente.
 
 **Comandos:**
+
 ```bash
 npm install -D prettier
 npx prettier index.js --write    # Formata e salva
@@ -76,11 +92,12 @@ npx prettier . --write           # Formata todo projeto
 ```
 
 **Configuração (.prettierrc.json):**
+
 ```json
 {
-  "tabWidth": 4,
-  "semi": false,
-  "singleQuote": true
+    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": true
 }
 ```
 
@@ -91,6 +108,7 @@ npx prettier . --write           # Formata todo projeto
 **O que faz:** Permite configurar hooks do Git que rodam automaticamente em eventos git.
 
 **Comandos:**
+
 ```bash
 npm install -D husky
 npx husky install                    # Inicializa husky
@@ -99,10 +117,12 @@ npx husky add .husky/commit-msg "..."    # Cria hook commit-msg
 ```
 
 **Arquivos criados:**
+
 - `.husky/pre-commit` - roda antes de cada commit
 - `.husky/commit-msg` - roda após mensagem de commit
 
 **Tornar executável:**
+
 ```bash
 chmod +x .husky/pre-commit
 chmod +x .husky/commit-msg
@@ -115,20 +135,44 @@ chmod +x .husky/commit-msg
 **O que faz:** Valida a mensagem do commit是否符合Conventional Commits padrão.
 
 **Comandos:**
+
 ```bash
 npm install -D @commitlint/cli@17.7.1 @commitlint/config-conventional
 npx commitlint --init
 ```
 
 **Configuração (commitlint.config.cjs):**
+
 ```javascript
 module.exports = {
-  extends: ['@commitlint/config-conventional'],
-};
+    extends: ['@commitlint/config-conventional'],
+    rules: {
+        'type-enum': [
+            2,
+            'always',
+            [
+                'feat',
+                'fix',
+                'chore',
+                'docs',
+                'style',
+                'refactor',
+                'test',
+                'build',
+                'ci',
+                'perf',
+                'revert',
+            ],
+        ],
+        'subject-full-stop': [0, 'never', '.'],
+    },
+}
 ```
+
 Nota: Use `.cjs` se o projeto tiver `"type": "module"` no package.json.
 
 **Conventional Commits padrão:**
+
 ```
 <tipo>(<escopo>): <descrição>
 
@@ -148,17 +192,19 @@ test: adiciona testes unitários
 **O que faz:** Roda lint apenas em arquivos staged (prontos para commit), muito mais rápido.
 
 **Comandos:**
+
 ```bash
 npm install -D lint-staged
 ```
 
 **Configuração (package.json):**
+
 ```json
 {
-  "lint-staged": {
-    "*.js": "eslint .",
-    "*.{js,json}": "prettier --write"
-  }
+    "lint-staged": {
+        "*.js": "eslint .",
+        "*.{js,json}": "prettier --write"
+    }
 }
 ```
 
@@ -217,6 +263,7 @@ npm pkg set lint-staged='{"*.js": "eslint", "*.{js,json}": "prettier --write"}'
 ```
 
 **Arquivos de configuração finais:**
+
 ```
 projeto/
 ├── .eslintrc.json      # ESLint config
