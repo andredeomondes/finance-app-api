@@ -26,6 +26,7 @@
         "*.{js,json}": "prettier --write"
     },
     "dependencies": {
+        "cross-spawn": "^7.0.6",
         "dotenv": "^17.4.2",
         "express": "^5.2.1",
         "pg": "^8.20.0"
