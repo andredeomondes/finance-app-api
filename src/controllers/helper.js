@@ -20,3 +20,19 @@ export const serverError = () => {
         },
     }
 }
+
+export const ok = (body) => {
+    return {
+        statusCode: 200,
+        body,
+    }
+}
+
+export const notFound = () => {
+    return {
+        statusCode: 404,
+        body: {
+            message: 'Resource not found',
+        },
+    }
+}
