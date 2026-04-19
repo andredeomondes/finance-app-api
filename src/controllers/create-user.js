@@ -16,20 +16,22 @@ export class CreateUserController {
             for (const field of requiredFields) {
                 if (!params[field] || params[field].trim().length === 0) {
                     return badRequest(
-                        `O campo ${field} é obrigatório e não pode estar vazio.`,
+                        `The field '${field}' is required and cannot be empty.`,
                     )
                 }
             }
 
             const passwordIsValid = params.password.length < 6
             if (passwordIsValid) {
-                return badRequest('A senha deve ter pelo menos 6 caracteres.')
+                return badRequest(
+                    'The password must be at least 6 characters long.',
+                )
             }
 
             const emailIsValid = validator.isEmail(params.email)
 
             if (!emailIsValid) {
-                return badRequest('O e-mail fornecido é inválido.')
+                return badRequest('The email provided is invalid.')
             }
 
             const createUserUseCase = new CreateUserUseCase()
