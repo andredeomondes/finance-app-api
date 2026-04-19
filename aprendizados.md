@@ -231,3 +231,14 @@ npx eslint .
 npx prettier --check .
 echo "feat: test" | npx commitlint
 ```
+
+serve e como usar?
+
+"bcrypt": "^6.0.0",
+"cross-spawn": "^7.0.6",
+"dotenv": "^17.4.2",
+"express": "^5.2.1",
+"pg": "^8.20.0",
+"uuid": "^13.0.0"
+
+use cases repositories controller
