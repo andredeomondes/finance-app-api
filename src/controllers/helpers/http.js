@@ -28,11 +28,11 @@ export const ok = (body) => {
     }
 }
 
-export const notFound = () => {
+export const notFound = (body) => {
     return {
         statusCode: 404,
         body: {
-            message: 'Resource not found',
+            message: body.message || 'Not found',
         },
     }
 }
