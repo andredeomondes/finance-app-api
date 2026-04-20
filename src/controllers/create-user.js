@@ -1,8 +1,15 @@
 import { CreateUserUseCase } from '../use-cases/create-user.js'
-import { badRequest, created, serverError } from './helper.js'
-import validator from 'validator'
+import { created, serverError } from './helpers/http.js'
+import {
+    checkIfPasswordIsValid,
+    generateEmailAlreadyInUseResponse,
+    generateFieldIsRequiredResponse,
+    generateInvalidEmailResponse,
+    generateInvalidPasswordResponse,
+    checkIfEmailIsValid,
+} from './helpers/user.js'
 
-import { EmailAreadyInUseError } from '../errors/user.js'
+import { EmailAlreadyInUseError } from '../errors/email-already-in-use-error.js'
 
 export class CreateUserController {
     async execute(httpRequest) {
@@ -17,23 +24,19 @@ export class CreateUserController {
 
             for (const field of requiredFields) {
                 if (!params[field] || params[field].trim().length === 0) {
-                    return badRequest(
-                        `The field '${field}' is required and cannot be empty.`,
-                    )
+                    return generateFieldIsRequiredResponse(field)
                 }
             }
 
-            const passwordIsNotValid = params.password.length < 6
-            if (passwordIsNotValid) {
-                return badRequest(
-                    'The password must be at least 6 characters long.',
-                )
+            const passwordIsValid = checkIfPasswordIsValid(params.password)
+            if (!passwordIsValid) {
+                return generateInvalidPasswordResponse()
             }
 
-            const emailIsValid = validator.isEmail(params.email)
+            const emailIsValid = checkIfEmailIsValid(params.email)
 
             if (!emailIsValid) {
-                return badRequest('The email provided is invalid.')
+                return generateInvalidEmailResponse()
             }
 
             const createUserUseCase = new CreateUserUseCase()
@@ -42,8 +45,8 @@ export class CreateUserController {
 
             return created(createdUser)
         } catch (error) {
-            if (error instanceof EmailAreadyInUseError) {
-                return badRequest({ message: error.message })
+            if (error instanceof EmailAlreadyInUseError) {
+                return generateEmailAlreadyInUseResponse()
             }
             console.log('Error creating user:', error)
             return serverError()

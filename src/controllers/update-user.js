@@ -1,6 +1,15 @@
-import { badRequest, serverError, ok } from './helper.js'
 import validator from 'validator'
+import { serverError, ok } from './helpers/http.js'
 import { UpdateUserUseCase } from '../use-cases/update-user.js'
+import {
+    generateInvalidEmailResponse,
+    generateInvalidPasswordResponse,
+    generateNoFieldsToUpdateResponse,
+    generateSomeFieldsNotAllowedResponse,
+    generateInvalidIdResponse,
+    checkIfPasswordIsValid,
+    checkIfEmailIsValid,
+} from './helpers/user.js'
 
 export class UpdateUserController {
     async execute(httpRequest) {
@@ -10,21 +19,13 @@ export class UpdateUserController {
             const isIdValid = validator.isUUID(userId)
 
             if (!isIdValid) {
-                return badRequest({
-                    message: 'Invalid user ID format. Expected a UUID.',
-                })
+                return generateInvalidIdResponse()
             }
 
-            console.log('httpRequest:', httpRequest)
-            const updateUserParams = httpRequest.body
+            const params = httpRequest.body || httpRequest
 
-            if (
-                !updateUserParams ||
-                Object.keys(updateUserParams).length === 0
-            ) {
-                return badRequest({
-                    message: 'No fields provided to update.',
-                })
+            if (!params || Object.keys(params).length === 0) {
+                return generateNoFieldsToUpdateResponse()
             }
 
             const allowedField = [
@@ -34,44 +35,31 @@ export class UpdateUserController {
                 'password',
             ]
 
-            const someFieldIsNotAllowed = Object.keys(updateUserParams).some(
+            const someFieldIsNotAllowed = Object.keys(params).some(
                 (field) => !allowedField.includes(field),
             )
 
             if (someFieldIsNotAllowed) {
-                return badRequest({
-                    message:
-                        'Some provided fields are not allowed to be updated.',
-                })
+                return generateSomeFieldsNotAllowedResponse()
             }
 
-            if (updateUserParams.password) {
-                const passwordIsNotValid = updateUserParams.password.length < 6
+            if (params.password) {
+                const passwordIsValid = checkIfPasswordIsValid(params.password)
 
-                if (passwordIsNotValid) {
-                    return badRequest({
-                        message:
-                            'The password must be at least 6 characters long.',
-                    })
+                if (!passwordIsValid) {
+                    return generateInvalidPasswordResponse()
                 }
             }
-            if (updateUserParams.email) {
-                const emailIsNotValid = !validator.isEmail(
-                    updateUserParams.email,
-                )
+            if (params.email) {
+                const emailIsValid = checkIfEmailIsValid(params.email)
 
-                if (emailIsNotValid) {
-                    return badRequest({
-                        message: 'The provided email is not valid.',
-                    })
+                if (!emailIsValid) {
+                    return generateInvalidEmailResponse()
                 }
             }
 
             const updateUserUseCase = new UpdateUserUseCase()
-            const updatedUser = await updateUserUseCase.execute(
-                userId,
-                updateUserParams,
-            )
+            const updatedUser = await updateUserUseCase.execute(userId, params)
             return ok(updatedUser)
         } catch (error) {
             console.error(error)
