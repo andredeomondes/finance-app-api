@@ -28,6 +28,6 @@ export class PostgresUpdateUserRepository {
             updateQuery,
             updateValues,
         )
-        return updatedUser.rows[0]
+        return updatedUser[0]
     }
 }

@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
-import { PostgresGetUserByEmailRepository } from '../repositories/postgres-get-user-by-email-repository.js'
-import { PostgresUpdateUserRepository } from '../repositories/postgres-update-user-repository.js'
+import { PostgresGetUserByEmailRepository } from '../repositories/postgres/get-user-by-email.js'
+import { PostgresUpdateUserRepository } from '../repositories/postgres/update-user.js'
 import { EmailAreadyInUseError } from '../errors/user.js'
 
 export class UpdateUserUseCase {
