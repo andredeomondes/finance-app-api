@@ -1,8 +1,7 @@
 import { CreateUserUseCase } from '../use-cases/index.js'
-import { EmailAlreadyInUseError } from '../errors/email-already-in-use-error.js'
+import { EmailAlreadyInUseError } from '../errors/user.js'
 import {
     checkIfPasswordIsValid,
-    generateEmailAlreadyInUseResponse,
     generateFieldIsRequiredResponse,
     generateInvalidEmailResponse,
     generateInvalidPasswordResponse,
@@ -46,7 +45,7 @@ export class CreateUserController {
             return created(createdUser)
         } catch (error) {
             if (error instanceof EmailAlreadyInUseError) {
-                return generateEmailAlreadyInUseResponse()
+                throw new EmailAlreadyInUseError()
             }
             console.log('Error creating user:', error)
             return serverError()

@@ -6,7 +6,7 @@ import {
     PostgresGetUserByEmailRepository,
 } from '../repositories/postgres/index.js'
 
-import { EmailAreadyInUseError } from '../errors/user.js'
+import { EmailAlreadyInUseError } from '../errors/user.js'
 
 export class CreateUserUseCase {
     async execute(createUserParams) {
@@ -19,7 +19,7 @@ export class CreateUserUseCase {
             )
 
         if (userWithProvidedEmail) {
-            throw new EmailAreadyInUseError(createUserParams.email)
+            throw new EmailAlreadyInUseError(createUserParams.email)
         }
 
         const userId = uuidv4()
