@@ -6,9 +6,12 @@ import {
     UpdateUserController,
     DeleteUserController,
 } from './src/controllers/index.js'
-import { PostgresGetUserByIdRepository } from './src/repositories/postgres/index.js'
-import { GetUserByIdUseCase } from './src/use-cases/index.js'
-
+import {
+    PostgresCreateUserRepository,
+    PostgresGetUserByIdRepository,
+} from './src/repositories/postgres/index.js'
+import { GetUserByIdUseCase, CreateUserUseCase } from './src/use-cases/index.js'
+import { PostgresGetUserByEmailRepository } from './src/repositories/postgres/get-user-by-email.js'
 const app = express()
 
 app.use(express.json())
@@ -17,20 +20,23 @@ app.use((req, res, next) => {
     next()
 })
 
-// Routes
-
-// User routes
-
-// Create user
 app.post('/api/users', async (req, res) => {
-    const createUserController = new CreateUserController()
+    const getUserByEmailRepository = new PostgresGetUserByEmailRepository()
+
+    const createUserRepository = new PostgresCreateUserRepository()
+
+    const createUserUseCase = new CreateUserUseCase(
+        getUserByEmailRepository,
+        createUserRepository,
+    )
+
+    const createUserController = new CreateUserController(createUserUseCase)
 
     const { statusCode, body } = await createUserController.execute(req)
 
     res.status(statusCode).send(body)
 })
 
-// Update user
 app.patch('/api/users/:userId', async (req, res) => {
     const updateUserController = new UpdateUserController()
 
@@ -38,14 +44,12 @@ app.patch('/api/users/:userId', async (req, res) => {
     res.status(statusCode).send(body)
 })
 
-// Delete user
 app.delete('/api/users/:userId', async (req, res) => {
     const deleteUserController = new DeleteUserController()
     const { statusCode, body } = await deleteUserController.execute(req)
     res.status(statusCode).send(body)
 })
 
-// Get user by id
 app.get('/api/users/:userId', async (req, res) => {
     const getUserByIdRepository = new PostgresGetUserByIdRepository()
     const getUserByIdUseCase = new GetUserByIdUseCase(getUserByIdRepository)
