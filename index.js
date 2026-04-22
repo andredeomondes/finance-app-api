@@ -6,6 +6,8 @@ import {
     UpdateUserController,
     DeleteUserController,
 } from './src/controllers/index.js'
+import { PostgresGetUserByIdRepository } from './src/repositories/postgres/index.js'
+import { GetUserByIdUseCase } from './src/use-cases/index.js'
 
 const app = express()
 
@@ -45,7 +47,9 @@ app.delete('/api/users/:userId', async (req, res) => {
 
 // Get user by id
 app.get('/api/users/:userId', async (req, res) => {
-    const getUserByIdController = new GetUserByIdController()
+    const getUserByIdRepository = new PostgresGetUserByIdRepository()
+    const getUserByIdUseCase = new GetUserByIdUseCase(getUserByIdRepository)
+    const getUserByIdController = new GetUserByIdController(getUserByIdUseCase)
 
     const { statusCode, body } = await getUserByIdController.execute(req)
 
