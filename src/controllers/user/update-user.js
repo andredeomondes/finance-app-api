@@ -9,7 +9,7 @@ import {
     checkIfIdIsValid,
     serverError,
     ok,
-} from './helpers/index.js'
+} from '../helpers/index.js'
 
 export class UpdateUserController {
     constructor(updateUserUseCase) {
