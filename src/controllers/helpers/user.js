@@ -32,16 +32,9 @@ export const generateFieldIsRequiredResponse = (field) =>
         message: `The field '${field}' is required and cannot be empty.`,
     })
 
-export const generateInvalidIdResponse = () =>
-    badRequest({
-        message: 'Invalid user ID format. Expected a UUID.',
-    })
-
 export const checkIfPasswordIsValid = (password) => password.length >= 6
 
 export const checkIfEmailIsValid = (email) => validator.isEmail(email)
-
-export const checkIfIdIsValid = (id) => validator.isUUID(id)
 
 export const userNotFoundResponse = () =>
     notFound({
