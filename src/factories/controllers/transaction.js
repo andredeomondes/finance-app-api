@@ -35,10 +35,10 @@ export const makeGetTransactionsByUserIdController = () => {
 
     const getUserByIdRepository = new PostgresGetUserByIdRepository()
 
-    const getTransactionsByUserIdUseCase = new GetTransactionsByUserIdUseCase(
+    const getTransactionsByUserIdUseCase = new GetTransactionsByUserIdUseCase({
         getTransactionsByUserIdRepository,
         getUserByIdRepository,
-    )
+    })
     const getTransactionsByUserIdController =
         new GetTransactionsByUserIdController(getTransactionsByUserIdUseCase)
     return getTransactionsByUserIdController

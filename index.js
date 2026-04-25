@@ -16,7 +16,15 @@ const app = express()
 
 app.use(express.json())
 app.use((req, res, next) => {
-    console.log('REQ:', req.method, req.path, 'body:', req.body)
+    console.log(
+        'REQ:',
+        req.method,
+        req.path,
+        'query:',
+        req.query,
+        'body:',
+        req.body,
+    )
     next()
 })
 
