@@ -13,8 +13,20 @@ npm run migrations
 
 - `npm run migrations` - Executa migrações do banco
 
+## Arquitetura
+
+```
+Request → Controller → Use Case → Repository → Database
+```
+
+- **Controller**: Valida dados da requisição HTTP
+- **Use Case**: Lógica de negócio
+- **Repository**: Acesso ao banco de dados
+
 ## Stack
 
 - Node.js + Express
-- PostgreSQL
+- PostgreSQL (pg)
+- bcrypt (hash de senhas)
+- uuid (IDs únicos)
 - ESLint + Prettier + Husky

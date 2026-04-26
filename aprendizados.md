@@ -224,6 +224,234 @@ export const PostgresHelper = {
 
 ---
 
+## Arquitetura: Repository → Use Case → Controller
+
+### Visão Geral
+
+```
+Request → Controller → Use Case → Repository → Database
+         ↓            ↓           ↓
+      Validation   Business    Data Access
+        Logic      Logic
+```
+
+### Repository
+
+Responsável pela comunicação com o banco de dados.
+
+```javascript
+import { PostgresHelper } from '../../../db/postgres/helper.js'
+
+export class PostgresCreateUserRepository {
+    async execute(createUserParams) {
+        await PostgresHelper.query(
+            'INSERT INTO users (id, first_name, last_name, email, password) VALUES ($1, $2, $3, $4, $5);',
+            [
+                createUserParams.id,
+                createUserParams.first_name,
+                createUserParams.last_name,
+                createUserParams.email,
+                createUserParams.password,
+            ],
+        )
+        const createdUser = await PostgresHelper.query(
+            'SELECT * FROM users WHERE id = $1',
+            [createUserParams.id],
+        )
+        return createdUser[0]
+    }
+}
+```
+
+### Use Case
+
+Responsável pela lógica de negócio. Recebe dados do controller, orchestrando repositories.
+
+```javascript
+import { v4 as uuidv4 } from 'uuid'
+import bcrypt from 'bcrypt'
+
+import { EmailAlreadyInUseError } from '../../errors/user.js'
+
+export class CreateUserUseCase {
+    constructor(getUserByEmailRepository, createUserRepository) {
+        this.getUserByEmailRepository = getUserByEmailRepository
+        this.createUserRepository = createUserRepository
+    }
+    async execute(createUserParams) {
+        const userWithProvidedEmail =
+            await this.getUserByEmailRepository.execute(createUserParams.email)
+
+        if (userWithProvidedEmail) {
+            throw new EmailAlreadyInUseError(createUserParams.email)
+        }
+
+        const userId = uuidv4()
+        const hashedPassword = await bcrypt.hash(createUserParams.password, 10)
+
+        const user = {
+            ...createUserParams,
+            id: userId,
+            password: hashedPassword,
+        }
+
+        const createdUser = await this.createUserRepository.execute(user)
+        return createdUser
+    }
+}
+```
+
+### Controller
+
+Recebe a requisição HTTP, valida dados e delega para o Use Case. Retorna resposta HTTP.
+
+```javascript
+import {
+    checkIfPasswordIsValid,
+    generateInvalidEmailResponse,
+    checkIfEmailIsValid,
+    serverError,
+    created,
+    validateRequiredFields,
+    requiredFieldIsMissingResponse,
+} from '../helpers/index.js'
+
+export class CreateUserController {
+    constructor(createUserUseCase) {
+        this.createUserUseCase = createUserUseCase
+    }
+
+    async execute(httpRequest) {
+        try {
+            const params = httpRequest.body
+            const requiredFields = [
+                'first_name',
+                'last_name',
+                'email',
+                'password',
+            ]
+
+            const { ok: requiredFieldsWereProvided, missingField } =
+                validateRequiredFields(params, requiredFields)
+
+            if (!requiredFieldsWereProvided) {
+                return requiredFieldIsMissingResponse(missingField)
+            }
+
+            const passwordIsValid = checkIfPasswordIsValid(params.password)
+            if (!passwordIsValid) {
+                return generateInvalidPasswordResponse()
+            }
+
+            const emailIsValid = checkIfEmailIsValid(params.email)
+            if (!emailIsValid) {
+                return generateInvalidEmailResponse()
+            }
+
+            const createdUser = await this.createUserUseCase.execute(params)
+            return created(createdUser)
+        } catch (error) {
+            if (error instanceof EmailAlreadyInUseError) {
+                throw new EmailAlreadyInUseError()
+            }
+            console.log('Error creating user:', error)
+            return serverError()
+        }
+    }
+}
+```
+
+### Factory (Injeção de Dependências)
+
+Conecta as camadas injetando dependências.
+
+```javascript
+import { PostgresCreateUserRepository } from '../repositories/postgres/user/create-user.js'
+import { CreateUserUseCase } from '../use-cases/user/create-user.js'
+import { CreateUserController } from '../controllers/user/create-user.js'
+
+export const makeCreateUser = () => {
+    const createUserRepository = new PostgresCreateUserRepository()
+    const createUserUseCase = new CreateUserUseCase(null, createUserRepository)
+    const createUserController = new CreateUserController(createUserUseCase)
+    return createUserController
+}
+```
+
+### Errors Customizados
+
+Herdam de `Error` e podem携带 dados específicos.
+
+```javascript
+export class EmailAlreadyInUseError extends Error {
+    constructor(email) {
+        super(`Email ${email} already in use`)
+        this.name = 'EmailAlreadyInUseError'
+    }
+}
+```
+
+### Helpers (Controller)
+
+Funções auxiliares para validação e respostas HTTP.
+
+```javascript
+export const validateRequiredFields = (params, requiredFields) => {
+    for (const field of requiredFields) {
+        if (!params[field]) {
+            return { ok: false, missingField: field }
+        }
+    }
+    return { ok: true }
+}
+
+export const checkIfEmailIsValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+}
+
+export const checkIfPasswordIsValid = (password) => {
+    return password && password.length >= 6
+}
+
+export const serverError = () => ({
+    statusCode: 500,
+    body: { error: 'Internal server error' },
+})
+
+export const created = (data) => ({
+    statusCode: 201,
+    body: data,
+})
+```
+
+---
+
+## Bibliotecas
+
+### bcrypt
+
+Criptografia de senhas.
+
+```javascript
+import bcrypt from 'bcrypt'
+
+const hashedPassword = await bcrypt.hash(password, 10)
+const isValid = await bcrypt.compare(password, hashedPassword)
+```
+
+### uuid
+
+Geração de IDs únicos.
+
+```javascript
+import { v4 as uuidv4 } from 'uuid'
+
+const userId = uuidv4()
+```
+
+---
+
 ## Testar
 
 ```bash
@@ -231,14 +459,3 @@ npx eslint .
 npx prettier --check .
 echo "feat: test" | npx commitlint
 ```
-
-serve e como usar?
-
-"bcrypt": "^6.0.0",
-"cross-spawn": "^7.0.6",
-"dotenv": "^17.4.2",
-"express": "^5.2.1",
-"pg": "^8.20.0",
-"uuid": "^13.0.0"
-
-use cases repositories controller
