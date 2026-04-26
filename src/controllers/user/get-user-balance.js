@@ -4,8 +4,9 @@ import {
     ok,
     checkIfIdIsValid,
     generateInvalidIdResponse,
-    UserNotFoundError,
 } from '../helpers/index.js'
+
+import { UserNotFoundError } from '../../errors/user.js'
 
 export class GetUserBalanceController {
     constructor(getUserBalanceUseCase) {
@@ -14,7 +15,7 @@ export class GetUserBalanceController {
 
     async execute(httpRequest) {
         try {
-            const userId = httpRequest.params.id
+            const userId = httpRequest.params.userId
 
             const idIsValid = checkIfIdIsValid(userId)
 
