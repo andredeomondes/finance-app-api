@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const createUserSchema = z.object({
+export const createAndUpdateUserSchema = z.object({
     first_name: z.string().trim().min(1, {
         message: `First name is required.`,
     }),
@@ -24,4 +24,8 @@ export const createUserSchema = z.object({
         .min(6, {
             message: 'Password must have at least 6 characters.',
         }),
+})
+
+export const updateUserSchema = createAndUpdateUserSchema.partial().strict({
+    message: 'Some provided field is not allowed.',
 })

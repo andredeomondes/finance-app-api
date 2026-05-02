@@ -1,7 +1,7 @@
 import { EmailAlreadyInUseError } from '../../errors/user.js'
 import { serverError, created, badRequest } from '../helpers/index.js'
-import { createUserSchema } from '../../schemas/user.js'
 import { ZodError } from 'zod'
+import { createAndUpdateUserSchema } from '../../schemas/index.js'
 
 export class CreateUserController {
     constructor(createUserUseCase) {
@@ -12,7 +12,7 @@ export class CreateUserController {
         try {
             const params = httpRequest.body
 
-            await createUserSchema.parseAsync(params)
+            await createAndUpdateUserSchema.parseAsync(params)
 
             const createdUser = await this.createUserUseCase.execute(params)
 
