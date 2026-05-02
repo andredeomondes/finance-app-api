@@ -1,14 +1,7 @@
 import { EmailAlreadyInUseError } from '../../errors/user.js'
-import {
-    checkIfPasswordIsValid,
-    generateInvalidEmailResponse,
-    generateInvalidPasswordResponse,
-    checkIfEmailIsValid,
-    serverError,
-    created,
-    validateRequiredFields,
-    requiredFieldIsMissingResponse,
-} from '../helpers/index.js'
+import { serverError, created, badRequest } from '../helpers/index.js'
+import { createUserSchema } from '../../schemas/user.js'
+import { ZodError } from 'zod'
 
 export class CreateUserController {
     constructor(createUserUseCase) {
@@ -18,39 +11,26 @@ export class CreateUserController {
     async execute(httpRequest) {
         try {
             const params = httpRequest.body
-            const requiredFields = [
-                'first_name',
-                'last_name',
-                'email',
-                'password',
-            ]
 
-            const { ok: requiredFieldsWereProvided, missingField } =
-                validateRequiredFields(params, requiredFields)
-
-            if (!requiredFieldsWereProvided) {
-                return requiredFieldIsMissingResponse(missingField)
-            }
-
-            const passwordIsValid = checkIfPasswordIsValid(params.password)
-            if (!passwordIsValid) {
-                return generateInvalidPasswordResponse()
-            }
-
-            const emailIsValid = checkIfEmailIsValid(params.email)
-
-            if (!emailIsValid) {
-                return generateInvalidEmailResponse()
-            }
+            await createUserSchema.parseAsync(params)
 
             const createdUser = await this.createUserUseCase.execute(params)
 
             return created(createdUser)
         } catch (error) {
-            if (error instanceof EmailAlreadyInUseError) {
-                throw new EmailAlreadyInUseError()
+            if (error instanceof ZodError) {
+                return badRequest({
+                    message: error.issues[0].message,
+                })
             }
-            console.log('Error creating user:', error)
+
+            if (error instanceof EmailAlreadyInUseError) {
+                return badRequest({
+                    message: error.message,
+                })
+            }
+
+            console.log(error)
             return serverError()
         }
     }
