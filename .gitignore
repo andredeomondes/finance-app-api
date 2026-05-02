@@ -1,5 +1,13 @@
+# Dependencies
 node_modules
+
+# Environment variables
 .env
+
+# Postgre volume
+postgres-data
+
+# Others
+
 *.log
 .DS_Store
-.postgres
