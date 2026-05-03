@@ -28,6 +28,7 @@
         "*.{js,json}": "prettier --write"
     },
     "dependencies": {
+        "@prisma/adapter-pg": "^7.8.0",
         "@prisma/client": "^7.8.0",
         "bcrypt": "^6.0.0",
         "cross-spawn": "^7.0.6",
