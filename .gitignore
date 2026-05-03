@@ -12,3 +12,6 @@ postgres-data
 *.log
 .DS_Store
 /src/generated/prisma
+
+# AI Context Files (não versionar)
+testing-ai-guide.md
