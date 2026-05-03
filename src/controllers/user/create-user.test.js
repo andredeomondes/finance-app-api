@@ -1,10 +1,3 @@
-/**
- * @file Teste unitário do CreateUserController
- * @description Testa apenas a camada HTTP (validação e resposta)
- * @pattern AAA (Arrange, Act, Assert)
- * @concept Stub - substitui o Use Case para isolar o controller
- */
-
 import { CreateUserController } from './create-user.js'
 
 describe('Create User Controller', () => {
@@ -13,13 +6,11 @@ describe('Create User Controller', () => {
             return user
         }
     }
-    // Testa:
-    it('should create a user', async () => {
-        // Arrange: instancia controller com stub e cria requisição válida
+
+    it('should create a user when all fields are valid', async () => {
         const createUserController = new CreateUserController(
             new CreateUserUseCaseStub(),
         )
-
         const httpRequest = {
             body: {
                 first_name: 'Nome',
@@ -29,31 +20,113 @@ describe('Create User Controller', () => {
             },
         }
 
-        // Act: executa o controller com a requisição
         const result = await createUserController.execute(httpRequest)
 
-        // Assert: verifica status 201 e body retornado
         expect(result.statusCode).toBe(201)
         expect(result.body).toBe(httpRequest.body)
     })
+
     it('should return 400 if first_name is not provided', async () => {
-        // Arrange: cria controller com stub e request sem first_name
         const createUserController = new CreateUserController(
             new CreateUserUseCaseStub(),
         )
         const httpRequest = {
             body: {
-                // first_name removido propositalmente para testar validação
                 last_name: 'Sobrenome',
                 email: 'email@dominio.com',
                 password: 'senhavalida123',
             },
         }
 
-        // Act: executa o controller
         const result = await createUserController.execute(httpRequest)
 
-        // Assert: Zod deve rejeitar e retornar 400
+        expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 400 if last_name is not provided', async () => {
+        const createUserController = new CreateUserController(
+            new CreateUserUseCaseStub(),
+        )
+        const httpRequest = {
+            body: {
+                first_name: 'Nome',
+                email: 'email@dominio.com',
+                password: 'senhavalida123',
+            },
+        }
+
+        const result = await createUserController.execute(httpRequest)
+
+        expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 400 if email is not provided', async () => {
+        const createUserController = new CreateUserController(
+            new CreateUserUseCaseStub(),
+        )
+        const httpRequest = {
+            body: {
+                first_name: 'Nome',
+                last_name: 'Sobrenome',
+                password: 'senhavalida123',
+            },
+        }
+
+        const result = await createUserController.execute(httpRequest)
+
+        expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 400 if email is invalid', async () => {
+        const createUserController = new CreateUserController(
+            new CreateUserUseCaseStub(),
+        )
+        const httpRequest = {
+            body: {
+                first_name: 'Nome',
+                last_name: 'Sobrenome',
+                email: 'teste',
+                password: 'senhavalida123',
+            },
+        }
+
+        const result = await createUserController.execute(httpRequest)
+
+        expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 400 if password is not provided', async () => {
+        const createUserController = new CreateUserController(
+            new CreateUserUseCaseStub(),
+        )
+        const httpRequest = {
+            body: {
+                first_name: 'Nome',
+                last_name: 'Sobrenome',
+                email: 'email@dominio.com',
+            },
+        }
+
+        const result = await createUserController.execute(httpRequest)
+
+        expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 400 if password has less than 6 characters', async () => {
+        const createUserController = new CreateUserController(
+            new CreateUserUseCaseStub(),
+        )
+        const httpRequest = {
+            body: {
+                first_name: 'Nome',
+                last_name: 'Sobrenome',
+                email: 'email@dominio.com',
+                password: '12345',
+            },
+        }
+
+        const result = await createUserController.execute(httpRequest)
+
         expect(result.statusCode).toBe(400)
     })
 })
