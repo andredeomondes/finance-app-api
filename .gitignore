@@ -11,3 +11,4 @@ postgres-data
 
 *.log
 .DS_Store
+/src/generated/prisma
