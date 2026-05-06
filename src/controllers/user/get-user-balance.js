@@ -20,7 +20,7 @@ export class GetUserBalanceController {
             const idIsValid = checkIfIdIsValid(userId)
 
             if (!idIsValid) {
-                return generateInvalidIdResponse
+                return generateInvalidIdResponse()
             }
 
             const balance = await this.getUserBalanceUseCase.execute({ userId })

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for controllers/user/create-user.js</title>
+    <title>Code coverage report for controllers/user/get-user-balance.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">controllers/user</a> create-user.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">controllers/user</a> get-user-balance.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>37/37</span>
+                <span class='fraction'>39/39</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>37/37</span>
+                <span class='fraction'>39/39</span>
             </div>
         
             
@@ -100,33 +100,38 @@
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -134,42 +139,43 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { EmailAlreadyInUseError } from '../../errors/user.js'
-import { serverError, created, badRequest } from '../helpers/index.js'
-import { ZodError } from 'zod'
-import { createAndUpdateUserSchema } from '../../schemas/index.js'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
+    serverError,
+    userNotFoundResponse,
+    ok,
+    checkIfIdIsValid,
+    generateInvalidIdResponse,
+} from '../helpers/index.js'
 &nbsp;
-export class CreateUserController {
-    constructor(createUserUseCase) {
-        this.createUserUseCase = createUserUseCase
+import { UserNotFoundError } from '../../errors/user.js'
+&nbsp;
+export class GetUserBalanceController {
+    constructor(getUserBalanceUseCase) {
+        this.getUserBalanceUseCase = getUserBalanceUseCase
     }
 &nbsp;
     async execute(httpRequest) {
         try {
-            const params = httpRequest.body
+            const userId = httpRequest.params.userId
 &nbsp;
-            await createAndUpdateUserSchema.parseAsync(params)
+            const idIsValid = checkIfIdIsValid(userId)
 &nbsp;
-            const createdUser = await this.createUserUseCase.execute(params)
+            if (!idIsValid) {
+                return generateInvalidIdResponse()
+            }
 &nbsp;
-            return created(createdUser)
+            const balance = await this.getUserBalanceUseCase.execute({ userId })
+&nbsp;
+            return ok(balance)
         } catch (error) {
-            if (error instanceof ZodError) {
-                return badRequest({
-                    message: error.issues[0].message,
-                })
+            if (error instanceof UserNotFoundError) {
+                return userNotFoundResponse()
             }
 &nbsp;
-            if (error instanceof EmailAlreadyInUseError) {
-                return badRequest({
-                    message: error.message,
-                })
-            }
+            console.error(error)
 &nbsp;
-            console.log(error)
             return serverError()
         }
     }
