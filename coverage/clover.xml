@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1777842627944" clover="3.2.0">
-  <project timestamp="1777842627944" name="All files">
+<coverage generated="1778045765158" clover="3.2.0">
+  <project timestamp="1778045765158" name="All files">
     <metrics statements="288" coveredstatements="170" conditionals="33" coveredconditionals="14" methods="35" coveredmethods="6" elements="356" coveredelements="190" complexity="0" loc="288" ncloc="288" packages="4" files="10" classes="10"/>
     <package name="controllers.helpers">
       <metrics statements="157" coveredstatements="63" conditionals="19" coveredconditionals="7" methods="28" coveredmethods="3"/>
@@ -14,11 +14,11 @@
         <line num="6" count="6" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
@@ -47,7 +47,7 @@
       </file>
       <file name="index.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/controllers/helpers/index.js">
         <metrics statements="4" coveredstatements="1" conditionals="17" coveredconditionals="5" methods="4" coveredmethods="1"/>
-        <line num="1" count="7" type="cond" truecount="2" falsecount="3"/>
+        <line num="1" count="8" type="cond" truecount="2" falsecount="3"/>
         <line num="2" count="0" type="cond" truecount="1" falsecount="3"/>
         <line num="3" count="0" type="cond" truecount="1" falsecount="3"/>
         <line num="4" count="0" type="cond" truecount="1" falsecount="3"/>
@@ -188,19 +188,19 @@
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="8" count="7" type="stmt"/>
-        <line num="9" count="7" type="stmt"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="12" count="7" type="stmt"/>
-        <line num="13" count="7" type="stmt"/>
-        <line num="14" count="7" type="stmt"/>
-        <line num="15" count="7" type="stmt"/>
-        <line num="16" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="16" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="8" type="cond" truecount="1" falsecount="0"/>
         <line num="21" count="6" type="stmt"/>
         <line num="22" count="6" type="stmt"/>
         <line num="23" count="6" type="stmt"/>
@@ -216,7 +216,7 @@
         <line num="33" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
-        <line num="36" count="7" type="stmt"/>
+        <line num="36" count="8" type="stmt"/>
         <line num="37" count="1" type="stmt"/>
       </file>
     </package>
@@ -243,7 +243,7 @@
       <metrics statements="81" coveredstatements="73" conditionals="9" coveredconditionals="3" methods="3" coveredmethods="1"/>
       <file name="index.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/schemas/index.js">
         <metrics statements="2" coveredstatements="1" conditionals="9" coveredconditionals="3" methods="2" coveredmethods="1"/>
-        <line num="1" count="7" type="cond" truecount="2" falsecount="3"/>
+        <line num="1" count="8" type="cond" truecount="2" falsecount="3"/>
         <line num="2" count="0" type="cond" truecount="1" falsecount="3"/>
       </file>
       <file name="transaction.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/schemas/transaction.js">

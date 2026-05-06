@@ -7,6 +7,12 @@ const config = {
     coverageDirectory: 'coverage',
 
     coverageProvider: 'v8',
+
+    transform: {
+        '^.+\\.js$': 'babel-jest',
+    },
+
+    transformIgnorePatterns: ['node_modules/(?!(@faker-js)/)'],
 }
 
 export default config
