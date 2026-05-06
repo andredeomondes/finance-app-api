@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1778051356775" clover="3.2.0">
-  <project timestamp="1778051356775" name="All files">
-    <metrics statements="363" coveredstatements="288" conditionals="61" coveredconditionals="41" methods="39" coveredmethods="20" elements="463" coveredelements="349" complexity="0" loc="363" ncloc="363" packages="4" files="12" classes="12"/>
+<coverage generated="1778052102882" clover="3.2.0">
+  <project timestamp="1778052102882" name="All files">
+    <metrics statements="363" coveredstatements="288" conditionals="62" coveredconditionals="42" methods="39" coveredmethods="20" elements="464" coveredelements="350" complexity="0" loc="363" ncloc="363" packages="4" files="12" classes="12"/>
     <package name="controllers.helpers">
       <metrics statements="157" coveredstatements="90" conditionals="28" coveredconditionals="15" methods="28" coveredmethods="11"/>
       <file name="http.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/controllers/helpers/http.js">
@@ -178,7 +178,7 @@
       </file>
     </package>
     <package name="controllers.user">
-      <metrics statements="112" coveredstatements="112" conditionals="21" coveredconditionals="21" methods="6" coveredmethods="6"/>
+      <metrics statements="112" coveredstatements="112" conditionals="22" coveredconditionals="22" methods="6" coveredmethods="6"/>
       <file name="create-user.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/controllers/user/create-user.js">
         <metrics statements="37" coveredstatements="37" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
@@ -220,7 +220,7 @@
         <line num="37" count="1" type="stmt"/>
       </file>
       <file name="delete-user.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/controllers/user/delete-user.js">
-        <metrics statements="36" coveredstatements="36" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <metrics statements="36" coveredstatements="36" conditionals="7" coveredconditionals="7" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -245,7 +245,7 @@
         <line num="22" count="3" type="stmt"/>
         <line num="23" count="3" type="stmt"/>
         <line num="24" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="25" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="25" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="26" count="1" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>

@@ -394,8 +394,9 @@ BRDA:19,2,0,1
 BRDA:21,3,0,3
 BRDA:24,4,0,2
 BRDA:25,5,0,1
-BRF:6
-BRH:6
+BRDA:25,6,0,1
+BRF:7
+BRH:7
 end_of_record
 TN:
 SF:src/controllers/user/get-user-balance.js
