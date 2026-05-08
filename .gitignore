@@ -15,3 +15,6 @@ postgres-data
 
 # AI Context Files (não versionar)
 testing-ai-guide.md
+
+# Test
+coverage

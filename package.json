@@ -5,7 +5,9 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "test": "jest",
+        "test": "jest  --passWithNoTests --silent",
+        "test:watch": "jest --watch  --passWithNoTests --silent",
+        "test:coverage": "jest --passWithNoTests --silent --coverage",
         "prepare": "husky",
         "postinstall": "npx husky install",
         "migrations": "node src/db/postgres/migrations/exec.js",

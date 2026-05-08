@@ -2,6 +2,8 @@
 const config = {
     clearMocks: true,
 
+    collectCoverageFrom: ['src/**/*.js'],
+
     collectCoverage: true,
 
     coverageDirectory: 'coverage',
