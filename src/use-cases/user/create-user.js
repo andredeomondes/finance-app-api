@@ -21,7 +21,7 @@ export class CreateUserUseCase {
             throw new EmailAlreadyInUseError(createUserParams.email)
         }
 
-        const userId = this.idGeneratorAdapter.execute()
+        const userId = await this.idGeneratorAdapter.execute()
 
         const hashedPassword = await this.passwordHasherAdapter.execute(
             createUserParams.password,
