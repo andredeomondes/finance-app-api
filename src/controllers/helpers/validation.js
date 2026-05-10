@@ -12,3 +12,8 @@ export const requiredFieldIsMissingResponse = (field) =>
     badRequest({
         message: `The field '${field}' is required and cannot be empty.`,
     })
+
+export const generateSomeFieldsNotAllowedResponse = () =>
+    badRequest({
+        message: 'Some provided field is not allowed.',
+    })
