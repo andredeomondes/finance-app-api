@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1778456895034" clover="3.2.0">
-  <project timestamp="1778456895034" name="All files">
-    <metrics statements="1137" coveredstatements="590" conditionals="157" coveredconditionals="112" methods="67" coveredmethods="40" elements="1361" coveredelements="742" complexity="0" loc="1137" ncloc="1137" packages="14" files="45" classes="45"/>
+<coverage generated="1779674313598" clover="3.2.0">
+  <project timestamp="1779674313598" name="All files">
+    <metrics statements="1137" coveredstatements="608" conditionals="159" coveredconditionals="114" methods="68" coveredmethods="42" elements="1364" coveredelements="764" complexity="0" loc="1137" ncloc="1137" packages="14" files="45" classes="45"/>
     <package name="adapters">
       <metrics statements="16" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="id-generator.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/adapters/id-generator.js">
@@ -1176,7 +1176,7 @@
       </file>
     </package>
     <package name="use-cases.user">
-      <metrics statements="123" coveredstatements="49" conditionals="13" coveredconditionals="10" methods="7" coveredmethods="4"/>
+      <metrics statements="123" coveredstatements="67" conditionals="15" coveredconditionals="12" methods="8" coveredmethods="6"/>
       <file name="create-user.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/use-cases/user/create-user.js">
         <metrics statements="39" coveredstatements="39" conditionals="7" coveredconditionals="7" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
@@ -1233,27 +1233,27 @@
         <line num="10" count="1" type="stmt"/>
       </file>
       <file name="get-user-balance.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/use-cases/user/get-user-balance.js">
-        <metrics statements="20" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
+        <metrics statements="20" coveredstatements="18" conditionals="3" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="0" falsecount="1"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
       </file>
       <file name="get-user-by-id.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/use-cases/user/get-user-by-id.js">
         <metrics statements="10" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
