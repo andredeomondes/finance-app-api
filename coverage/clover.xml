@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1780154540521" clover="3.2.0">
-  <project timestamp="1780154540521" name="All files">
-    <metrics statements="1137" coveredstatements="696" conditionals="176" coveredconditionals="136" methods="71" coveredmethods="48" elements="1384" coveredelements="880" complexity="0" loc="1137" ncloc="1137" packages="14" files="45" classes="45"/>
+<coverage generated="1780154653354" clover="3.2.0">
+  <project timestamp="1780154653354" name="All files">
+    <metrics statements="1137" coveredstatements="696" conditionals="177" coveredconditionals="137" methods="71" coveredmethods="48" elements="1385" coveredelements="881" complexity="0" loc="1137" ncloc="1137" packages="14" files="45" classes="45"/>
     <package name="adapters">
       <metrics statements="16" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="id-generator.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/adapters/id-generator.js">
@@ -1085,28 +1085,28 @@
       </file>
     </package>
     <package name="use-cases.transaction">
-      <metrics statements="76" coveredstatements="32" conditionals="7" coveredconditionals="4" methods="5" coveredmethods="2"/>
+      <metrics statements="76" coveredstatements="32" conditionals="8" coveredconditionals="5" methods="5" coveredmethods="2"/>
       <file name="create-transaction.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/use-cases/transaction/create-transaction.js">
-        <metrics statements="32" coveredstatements="32" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <metrics statements="32" coveredstatements="32" conditionals="5" coveredconditionals="5" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="5" count="5" type="stmt"/>
-        <line num="6" count="5" type="stmt"/>
-        <line num="7" count="5" type="stmt"/>
-        <line num="8" count="5" type="stmt"/>
-        <line num="9" count="5" type="stmt"/>
-        <line num="10" count="5" type="stmt"/>
-        <line num="11" count="5" type="stmt"/>
-        <line num="12" count="5" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="6" count="6" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="9" count="6" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+        <line num="11" count="6" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="15" count="5" type="stmt"/>
-        <line num="16" count="5" type="stmt"/>
-        <line num="17" count="5" type="stmt"/>
-        <line num="18" count="5" type="stmt"/>
-        <line num="19" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="18" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="6" type="cond" truecount="1" falsecount="0"/>
         <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="22" count="4" type="stmt"/>
