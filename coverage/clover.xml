@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1780154969275" clover="3.2.0">
-  <project timestamp="1780154969275" name="All files">
-    <metrics statements="1137" coveredstatements="696" conditionals="179" coveredconditionals="139" methods="71" coveredmethods="48" elements="1387" coveredelements="883" complexity="0" loc="1137" ncloc="1137" packages="14" files="45" classes="45"/>
+<coverage generated="1780155664665" clover="3.2.0">
+  <project timestamp="1780155664665" name="All files">
+    <metrics statements="1137" coveredstatements="707" conditionals="180" coveredconditionals="141" methods="72" coveredmethods="50" elements="1389" coveredelements="898" complexity="0" loc="1137" ncloc="1137" packages="14" files="45" classes="45"/>
     <package name="adapters">
       <metrics statements="16" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="id-generator.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/adapters/id-generator.js">
@@ -1085,7 +1085,7 @@
       </file>
     </package>
     <package name="use-cases.transaction">
-      <metrics statements="76" coveredstatements="32" conditionals="10" coveredconditionals="7" methods="5" coveredmethods="2"/>
+      <metrics statements="76" coveredstatements="43" conditionals="11" coveredconditionals="9" methods="6" coveredmethods="4"/>
       <file name="create-transaction.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/use-cases/transaction/create-transaction.js">
         <metrics statements="32" coveredstatements="32" conditionals="7" coveredconditionals="7" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
@@ -1122,18 +1122,18 @@
         <line num="32" count="1" type="stmt"/>
       </file>
       <file name="delete-transaction.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/use-cases/transaction/delete-transaction.js">
-        <metrics statements="11" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
+        <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
       </file>
       <file name="get-transactions-by-user-id.js" path="/home/andredeomondes/Dev/fsc-estudos/projects/finance-app-api/src/use-cases/transaction/get-transactions-by-user-id.js">
         <metrics statements="19" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
