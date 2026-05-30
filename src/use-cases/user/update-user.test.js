@@ -26,7 +26,7 @@ describe('UpdateUserUseCase', () => {
 
     class UpdateUserRepositoryStub {
         async execute() {
-            return
+            return user
         }
     }
 
@@ -101,7 +101,7 @@ describe('UpdateUserUseCase', () => {
     it('should throw EmailAlreadyInUseError if GetUserByEmailRepository returns a user', async () => {
         // Arrange
         const { sut, getUserByEmailRepository } = makeSut()
-        jest.sypOn(getUserByEmailRepository, 'execute').mockResolvedValue(user)
+        jest.spyOn(getUserByEmailRepository, 'execute').mockResolvedValue(user)
 
         // Act
         const promise = sut.execute(faker.string.uuid(), {
@@ -112,5 +112,53 @@ describe('UpdateUserUseCase', () => {
         await expect(promise).rejects.toThrow(
             new EmailAlreadyInUseError(user.email),
         )
+    })
+
+    it('should throw if GetUserByEmailRepository throws', async () => {
+        // Arrange
+        const { sut, getUserByEmailRepository } = makeSut()
+        jest.spyOn(getUserByEmailRepository, 'execute').mockRejectedValueOnce(
+            new Error(),
+        )
+
+        // Act
+        const promise = sut.execute(faker.string.uuid(), {
+            email: faker.internet.email(),
+        })
+
+        // Assert
+        await expect(promise).rejects.toThrow()
+    })
+
+    it('should throw if UpdateUserRepository throws', async () => {
+        // Arrange
+        const { sut, updateUserRepository } = makeSut()
+        jest.spyOn(updateUserRepository, 'execute').mockRejectedValueOnce(
+            new Error(),
+        )
+
+        // Act
+        const promise = sut.execute(faker.string.uuid(), {
+            first_name: faker.person.firstName(),
+        })
+
+        // Assert
+        await expect(promise).rejects.toThrow()
+    })
+
+    it('should throw if PasswordHasherAdapter throws', async () => {
+        // Arrange
+        const { sut, passwordHasherAdapter } = makeSut()
+        jest.spyOn(passwordHasherAdapter, 'execute').mockRejectedValueOnce(
+            new Error(),
+        )
+
+        // Act
+        const promise = sut.execute(faker.string.uuid(), {
+            password: user.password,
+        })
+
+        // Assert
+        await expect(promise).rejects.toThrow()
     })
 })
