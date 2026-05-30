@@ -4,8 +4,8 @@ import { faker } from '@faker-js/faker'
 
 describe('Create User Controller', () => {
     class CreateUserUseCaseStub {
-        execute(user) {
-            return user
+        execute(params) {
+            return params
         }
     }
 

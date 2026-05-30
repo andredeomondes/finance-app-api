@@ -1,9 +1,8 @@
 import { CreateTransactionController } from './create-transaction'
-import { faker } from '@faker-js/faker'
-
+import { transaction } from '../../tests/'
 describe('Create Transaction Controller', () => {
     class CreateTransactionUseCaseStub {
-        async execute(transaction) {
+        async execute() {
             return transaction
         }
     }
@@ -20,11 +19,8 @@ describe('Create Transaction Controller', () => {
 
     const baseHttpRequest = {
         body: {
-            user_id: faker.string.uuid(),
-            name: faker.commerce.productName(),
-            date: faker.date.anytime().toISOString(),
-            type: 'EARNING',
-            amount: Number(faker.finance.amount()),
+            ...transaction,
+            id: undefined,
         },
     }
 
