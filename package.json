@@ -5,12 +5,12 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "test": "jest  --passWithNoTests --silent",
-        "test:watch": "jest --watch  --passWithNoTests --silent",
-        "test:coverage": "jest --passWithNoTests --silent --coverage",
+        "test": "dotenv -e .env.test -- jest --runInBand --passWithNoTests --silent",
+        "test:watch": "npm run test -- --watch",
+        "test:coverage": "npm run test -- --coverage",
         "prepare": "husky",
-        "postinstall": "npx husky install",
-        "migrations": "node src/db/postgres/migrations/exec.js",
+        "postinstall": "husky install && prisma generate",
+        "migrations": "prisma migrate deploy",
         "start:dev": "node --watch index.js"
     },
     "keywords": [],
@@ -40,10 +40,17 @@
         "bcrypt": "^6.0.0",
         "cross-spawn": "^7.0.6",
         "dotenv": "^17.4.2",
+        "dotenv-cli": "^11.0.0",
         "express": "^5.2.1",
         "pg": "^8.20.0",
         "uuid": "^13.0.0",
         "validator": "^13.15.35",
         "zod": "^4.4.2"
+    },
+    "allowScripts": {
+        "@prisma/engines@7.8.0": true,
+        "bcrypt@6.0.0": true,
+        "prisma@7.8.0": true,
+        "unrs-resolver@1.11.1": true
     }
 }
