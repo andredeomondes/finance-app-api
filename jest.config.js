@@ -2,6 +2,8 @@
 const config = {
     clearMocks: true,
 
+    setupFiles: ['dotenv/config'],
+
     collectCoverageFrom: ['src/**/*.js'],
 
     collectCoverage: true,
@@ -13,6 +15,8 @@ const config = {
     transform: {
         '^.+\\.js$': 'babel-jest',
     },
+    globalSetup: '<rootDir>/jest.global-setup.js',
+    setupFilesAfterEnv: ['<rootDir>/jest.setup-after-env.js'],
 
     transformIgnorePatterns: ['node_modules/(?!(@faker-js)/)'],
 }
